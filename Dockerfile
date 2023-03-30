@@ -38,3 +38,22 @@ WORKDIR /opt/tomcat/webapps
 RUN wget https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war
 EXPOSE 8080
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+
+
+LOAD BALANCING
+THREE INSTANCES WITH TOMCAT, APACHE AND NGINX
+dockerfile
+FROM nginx
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+nginx.conf
+upstream loadbalancer {
+server 172.31.37.221:80 weight=6;
+server 172.31.46.112:8080 weight=4;
+}
+server {
+location / {
+proxy_pass http://loadbalancer;
+}}
+
