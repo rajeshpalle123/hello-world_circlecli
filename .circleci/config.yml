@@ -8,7 +8,7 @@ jobs:
       - run:
           name: Build WAR
           command: |
-          mvn clean package \
+          mvn clean package 
             curl -T target/*.war \
             "http://<TOMCAT_USERNAME>:<TOMCAT_PASSWORD>@<TOMCAT_HOST>:<TOMCAT_PORT>/manager/text/deploy?path=/myapp&update=true"
   deploy:
