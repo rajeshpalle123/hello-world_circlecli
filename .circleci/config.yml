@@ -8,7 +8,7 @@ jobs:
       - run:
           name: Build WAR
           command:  mvn clean package 
-       -run: 
+       - run: 
           name: Deploying WAR
           command: |
             curl -T target/*.war \
