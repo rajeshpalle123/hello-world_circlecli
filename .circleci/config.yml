@@ -1,0 +1,25 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:11
+    steps:
+      - checkout
+      - run:
+          name: Build WAR
+          command: mvn clean package
+      - persist_to_workspace:
+          root: .
+          paths:
+            - target/*.war
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Deploy WAR to Tomcat
+          command: |
+            curl -T target/*.war \
+            "http://<TOMCAT_USERNAME>:<TOMCAT_PASSWORD>@<TOMCAT_HOST>:<TOMCAT_PORT>/manager/text/deploy?path=/myapp&update=true"
