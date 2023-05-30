@@ -13,14 +13,3 @@ jobs:
           command: |
             curl -T target/*.war \
             "http://<TOMCAT_USERNAME>:<TOMCAT_PASSWORD>@<TOMCAT_HOST>:<TOMCAT_PORT>/manager/text/deploy?path=/myapp&update=true"
-  deploy:
-    machine:
-      enabled: true
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Deploy WAR to Tomcat
-          command: |
-            curl -T target/*.war \
-            "http://<TOMCAT_USERNAME>:<TOMCAT_PASSWORD>@<TOMCAT_HOST>:<TOMCAT_PORT>/manager/text/deploy?path=/myapp&update=true"
