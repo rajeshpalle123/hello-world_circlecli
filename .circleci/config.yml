@@ -26,7 +26,7 @@ jobs:
           command: mvn clean package -DskipTests=true
 
       - store_artifacts:
-          path: target/your-app.war
+          path: target/webapp.war
 
   deploy:
     docker:
