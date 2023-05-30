@@ -23,7 +23,7 @@ jobs:
 
       - run:
           name: Build and package WAR
-          command: mvn clean package
+          command: mvn install
 
 
   deploy:
