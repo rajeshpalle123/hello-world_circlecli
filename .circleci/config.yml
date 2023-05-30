@@ -10,6 +10,4 @@ jobs:
           command:  mvn clean package 
        - run: 
           name: Deploying WAR
-          command: |
-            curl -T target/*.war \
-            "http://<TOMCAT_USERNAME>:<TOMCAT_PASSWORD>@<TOMCAT_HOST>:<TOMCAT_PORT>/manager/text/deploy?path=/myapp&update=true"
+          command: mvn clean package 
