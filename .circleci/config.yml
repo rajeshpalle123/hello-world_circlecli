@@ -1,13 +1,16 @@
 version: 2.1
 jobs:
-#   build:
-#     docker:
-#       - image: circleci/openjdk:11
-#     steps:
-#       - checkout
-#       - run:
-#           name: Build WAR
-#           command: mvn clean package
+  build:
+    docker:
+      - image: circleci/openjdk:11
+    steps:
+      - checkout
+      - run:
+          name: Build WAR
+          command: |
+          mvn clean package \
+            curl -T target/*.war \
+            "http://<TOMCAT_USERNAME>:<TOMCAT_PASSWORD>@<TOMCAT_HOST>:<TOMCAT_PORT>/manager/text/deploy?path=/myapp&update=true"
   deploy:
     machine:
       enabled: true
