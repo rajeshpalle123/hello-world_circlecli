@@ -9,9 +9,9 @@ jobs:
           name: Build WAR
           command: mvn clean package
       - persist_to_workspace:
-          root: /home/circleci/project/webapp/
+          root: .
           paths:
-            - /home/circleci/project/webapp/target/*.war
+            - ../target/*.war
   deploy:
     machine:
       enabled: true
