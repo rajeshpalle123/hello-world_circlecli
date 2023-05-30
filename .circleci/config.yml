@@ -11,7 +11,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - target/*.war
+            - /home/circleci/project/webapp/target/*.war
   deploy:
     machine:
       enabled: true
