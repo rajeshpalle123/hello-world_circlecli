@@ -8,18 +8,18 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
+#       - restore_cache:
+#           keys:
+#             - v1-dependencies-{{ checksum "pom.xml" }}
 
-      - run:
-          name: Install dependencies
-          command: mvn dependency:go-offline
+#       - run:
+#           name: Install dependencies
+#           command: mvn dependency:go-offline
 
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+#       - save_cache:
+#           paths:
+#             - ~/.m2
+#           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       - run:
           name: Build and package WAR
