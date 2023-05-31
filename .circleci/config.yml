@@ -22,7 +22,7 @@ jobs:
             export TOMCAT_PASSWORD=admin
 
             # Deploy the WAR file to Tomcat
-			  curl -T /root/project/webapp/target/webapp.war "http://admin:admin@34.239.102.33:$8080/manager/text/deploy?path=/webapp" 
+			  curl -T target/webapp.war "http://admin:admin@34.239.102.33:$8080/manager/text/deploy?path=/webapp" 
 
 workflows:
   version: 2
