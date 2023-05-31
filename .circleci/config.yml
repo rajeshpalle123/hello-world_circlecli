@@ -19,11 +19,11 @@ jobs:
             apt-get update && apt-get install -y curl
 
             # Configure Tomcat credentials
-            export TOMCAT_USERNAME=<tomcat-username>
-            export TOMCAT_PASSWORD=<tomcat-password>
+            export TOMCAT_USERNAME=admin
+            export TOMCAT_PASSWORD=admin
 
             # Deploy the WAR file to Tomcat
-            curl -v -T target/your-application.war "http://$TOMCAT_USERNAME:$TOMCAT_PASSWORD@localhost:8080/manager/text/deploy?path=/your-application"
+            curl -v -T target/webapp.war "http://admin:admin@34.239.102.33:8080//manager/text/deploy?path=/webapp"
 
 workflows:
   version: 2
