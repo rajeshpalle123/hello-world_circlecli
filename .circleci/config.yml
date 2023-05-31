@@ -3,43 +3,30 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:11
-
-    steps:
-      - checkout
-
-#       - restore_cache:
-#           keys:
-#             - v1-dependencies-{{ checksum "pom.xml" }}
-
-#       - run:
-#           name: Install dependencies
-#           command: mvn dependency:go-offline
-
-#       - save_cache:
-#           paths:
-#             - ~/.m2
-#           key: v1-dependencies-{{ checksum "pom.xml" }}
-
-      - run:
-          name: Build and package WAR
-          command: mvn install
-
-
-  deploy:
-    docker:
-      - image: circleci/tomcat:9.0-jdk11
-
-    environment:
-      TOMCAT_USER: your-tomcat-username
-      TOMCAT_PASSWORD: your-tomcat-password
-      TOMCAT_URL: http://your-tomcat-server:8080
+      - image: maven:3.8.4-jdk-11
+    working_directory: ~/app
 
     steps:
       - checkout
 
       - run:
-          name: Deploy WAR to Tomcat
+          name: Build Maven Project
+          command: mvn clean package
+
+      - run:
+          name: Deploy to Tomcat
           command: |
-            curl -v -u $TOMCAT_USER:$TOMCAT_PASSWORD \
-            -X PUT "$TOMCAT_URL/manager/text/deploy?path=/your-app&war=file:/home/circleci/project/target/your-app.war"
+            apt-get update && apt-get install -y curl
+
+            # Configure Tomcat credentials
+            export TOMCAT_USERNAME=<tomcat-username>
+            export TOMCAT_PASSWORD=<tomcat-password>
+
+            # Deploy the WAR file to Tomcat
+            curl -v -T target/your-application.war "http://$TOMCAT_USERNAME:$TOMCAT_PASSWORD@localhost:8080/manager/text/deploy?path=/your-application"
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
