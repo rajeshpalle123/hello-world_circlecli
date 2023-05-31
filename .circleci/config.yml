@@ -20,7 +20,7 @@ jobs:
 
             # Deploy the WAR file to Tomcat
 
-            curl -v -u admin:admin --upload-file /root/project/webapp/target/webapp.war "http://34.239.102.33:8080/manager/text/deploy?path=/"
+            curl -v -u admin:admin --upload-file /root/project/webapp/target/webapp.war "http://34.239.102.33:8080/manager/text/deploy?path=/webapp"
 
 workflows:
   version: 2
