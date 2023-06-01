@@ -30,7 +30,7 @@ jobs:
   build-and-deploy:
     docker:
       - image: maven:3.8.4-jdk-11
-          - run:
+      - run:
           name: Deploy to Tomcat
           command: |
             apt-get update && apt-get install -y curl
