@@ -11,8 +11,8 @@ jobs:
           name: Build Maven Project
           command: mvn clean package
 
-  build-and-deploy:
-    docker:
+   deploy:
+     docker:
       - image: maven:3.8.4-jdk-11
       - run:
           name: Deploy to Tomcat
