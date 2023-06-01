@@ -16,7 +16,7 @@ jobs:
     docker:
       - image: maven:3.8.4-jdk-11
 
-       steps:
+        steps:
          - checkout
 
          - run:
