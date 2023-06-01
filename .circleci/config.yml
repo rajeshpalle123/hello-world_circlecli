@@ -1,5 +1,20 @@
 version: 2.1
 
+
+workflows:
+  ci-wf:
+    jobs:
+      - build-and-deploy
+
+  sched-cd-wf:
+    triggers:
+      - schedule:
+          cron: "0 16 * * 1,2,3,4,5" 
+          filters:
+            branches:
+              only: master
+     
+
 jobs:
   build:
     docker:
@@ -12,7 +27,10 @@ jobs:
           name: Build Maven Project
           command: mvn clean package
 
-      - run:
+  build-and-deploy:
+    docker:
+      - image: maven:3.8.4-jdk-11
+          - run:
           name: Deploy to Tomcat
           command: |
             apt-get update && apt-get install -y curl
@@ -21,9 +39,3 @@ jobs:
             # Deploy the WAR file to Tomcat
 
             curl -v -u admin:admin --upload-file /root/project/webapp/target/webapp.war "http://34.239.102.33:8080/manager/text/deploy?path=/webapp"
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
