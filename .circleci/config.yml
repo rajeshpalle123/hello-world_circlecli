@@ -23,7 +23,7 @@ jobs:
           name: Build Maven Project
           command: mvn clean package
 
-   deploy:
+   build-and-deploy:
      docker:
       - image: maven:3.8.4-jdk-11
       - run:
