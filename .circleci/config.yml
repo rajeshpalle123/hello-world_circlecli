@@ -1,20 +1,4 @@
 version: 2.1
-
-
-workflows:
-  ci-wf:
-    jobs:
-      - build-and-deploy
-
-  sched-cd-wf:
-    triggers:
-      - schedule:
-          cron: "0 16 * * 1,2,3,4,5" 
-          filters:
-            branches:
-              only: master
-     
-
 jobs:
   build:
     docker:
