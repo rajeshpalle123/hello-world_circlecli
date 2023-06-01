@@ -20,8 +20,8 @@ jobs:
          - checkout
 
          - run:
-          name: Build Maven Project
-          command: mvn clean package
+            name: Build Maven Project
+            command: mvn clean package
 
    build-and-deploy:
         docker:
